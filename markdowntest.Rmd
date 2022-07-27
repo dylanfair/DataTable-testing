@@ -1,0 +1,62 @@
+---
+title: "Datatable Testing"
+output: html_document
+date: '2022-07-27'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(DT)
+library(dplyr)
+
+df_to_js <- function(x, var_name = "data", ...){
+  
+  json_data <- jsonlite::toJSON(x, ...)
+  
+  htmltools::tags$script(paste0("var ",var_name," = ", json_data, ";"))
+}
+
+testData = read.csv("testdata.csv")
+
+
+
+```
+
+```{r data-script-tag,  echo=FALSE}
+df_to_js(testData, "testData")
+```
+
+
+# Testing if possible to grab data from an R datatable
+
+```{r cars, echo=FALSE}
+DT::datatable(testData, filter = "top", rownames = FALSE,
+              callback = JS("
+                            
+                            table.on('search.dt', function() {
+                              searched_data = table.rows( { search: 'applied' } ).data()
+                              console.log(searched_data.length); 
+                              newData = []
+                              for (var i = 0; i < searched_data.length; i++) {
+                                  newData.push(searched_data[i])
+                              }
+                              console.log(newData)
+                            // at this point data would go into a new render of plot
+                            });
+                            
+                            console.log(table.rows().data());
+                            
+                            return table;
+                            "))
+```
+
+
+```{js testing, echo=FALSE}
+// var table = $(".html-widget-static-bound").DataTable();
+
+// console.log(table.rows().data())
+
+
+```
+
