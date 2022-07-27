@@ -31,21 +31,31 @@ df_to_js(testData, "testData")
 # Testing if possible to grab data from an R datatable
 
 ```{r cars, echo=FALSE}
-DT::datatable(testData, filter = "top", rownames = FALSE,
+DT::datatable(testData, filter = "top", rownames = TRUE,
               callback = JS("
-                            
                             table.on('search.dt', function() {
                               searched_data = table.rows( { search: 'applied' } ).data()
-                              console.log(searched_data.length); 
-                              newData = []
-                              for (var i = 0; i < searched_data.length; i++) {
-                                  newData.push(searched_data[i])
-                              }
-                              console.log(newData)
+                              //console.log(searched_data.length);
+                            newIndexes = []
+                            for (var i= 0; i < searched_data.length; i++) {
+                              newIndexes.push(searched_data[i][0] - 1)
+                            }
+                            
+                              //newData = []
+                            //  for (var i = 0; i < searched_data.length; i++) {
+                            //      newData.push(searched_data[i])
+                            //  }
+                              console.log(newIndexes)
                             // at this point data would go into a new render of plot
+                            
+                            var filteredData = testData.filter((d,i) => newIndexes.indexOf(i) != -1);
+                            console.log(filteredData)
+                            
+                            
                             });
                             
-                            console.log(table.rows().data());
+                            // This will filter out data based on index of returned values
+                            // var filteredData = testData.filter((d, i) => indexList.indexOf(i) != -1)
                             
                             return table;
                             "))
