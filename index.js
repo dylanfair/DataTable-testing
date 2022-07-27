@@ -1,11 +1,13 @@
-var $ = require( 'jquery' );
-var dt = require( 'datatables.net' )( window, $ );
-var buttons = require( 'datatables.net-dt' )( window, $ );
 
 $(function() {
-    $('#table_id').DataTable();
+    $('#table_id').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
 });
 
 
 var DTtable = $('#table_id').DataTable();
-console.log(DTtable.rows().data())
+console.log(DTtable.rows().data());
