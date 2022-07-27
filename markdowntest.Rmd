@@ -27,6 +27,16 @@ testData = read.csv("testdata.csv")
 df_to_js(testData, "testData")
 ```
 
+```{js testing, echo=FALSE}
+// var table = $(".html-widget-static-bound").DataTable();
+
+// console.log(table.rows().data())
+
+var filteredData;
+
+
+```
+
 
 # Testing if possible to grab data from an R datatable
 
@@ -48,7 +58,7 @@ DT::datatable(testData, filter = "top", rownames = TRUE,
                               console.log(newIndexes)
                             // at this point data would go into a new render of plot
                             
-                            var filteredData = testData.filter((d,i) => newIndexes.indexOf(i) != -1);
+                            filteredData = testData.filter((d,i) => newIndexes.indexOf(i) != -1);
                             console.log(filteredData)
                             
                             
@@ -62,11 +72,5 @@ DT::datatable(testData, filter = "top", rownames = TRUE,
 ```
 
 
-```{js testing, echo=FALSE}
-// var table = $(".html-widget-static-bound").DataTable();
 
-// console.log(table.rows().data())
-
-
-```
 
