@@ -1,0 +1,24 @@
+{
+  "name": "datatable-testing",
+  "version": "1.0.0",
+  "description": "Going to use this repository to test the js variant of DataTable",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dylanfair/DataTable-testing.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dylanfair/DataTable-testing/issues"
+  },
+  "homepage": "https://github.com/dylanfair/DataTable-testing#readme",
+  "dependencies": {
+    "datatables": "^1.10.18",
+    "datatables.net": "^1.12.1",
+    "datatables.net-dt": "^1.12.1"
+  }
+}
